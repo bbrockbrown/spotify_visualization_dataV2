@@ -1,5 +1,5 @@
 import functools
-from flask import Blueprint, flash, g, redirect, render_template, request, url_for, jsonify
+from flask import Blueprint, flash, g, redirect, render_template, request, url_for, jsonify, session
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from flaskr.db import get_db
@@ -11,7 +11,6 @@ matplotlib.use('agg')
 import matplotlib.pyplot as plt
 import matplotlib.tri as tri
 # checks if user is in session
-from utils.session import inSession
 
 bp = Blueprint('web', __name__, url_prefix='/web')
 
@@ -38,12 +37,12 @@ def song():
 
 @bp.route("/artist-search-page", methods=["POST", "GET"])    
 def artist():
-    return render_template("artist.html", logged_in=inSession())
+    return render_template("web/artist.html", logged_in=inSession())
 
 
 @bp.route("/album-search-page", methods=["GET", "POST"])
 def album():
-    return render_template("album.html", logged_in=inSession())
+    return render_template("web/album.html", logged_in=inSession())
 
 
 def genReading(data):
@@ -109,3 +108,6 @@ def delete_old_images():
             os.remove(image)
         except OSError as e:
             print(f"Error deleting file {image}: {e}")
+
+def inSession():
+    return "user" in session

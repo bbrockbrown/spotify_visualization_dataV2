@@ -4,13 +4,8 @@ from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from flaskr.db import get_db
 import os, uuid, glob
-# checks if user is in session
-from utils.session import inSession
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
-
-# get database
-db = get_db()
 
 @bp.route('/sign-up', methods=['GET', 'POST'])
 def signUp():
@@ -20,6 +15,9 @@ def signUp():
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
+        
+        # get database
+        db = get_db()
         
         # Check if user already exists
         existing_user = db.execute(
@@ -51,7 +49,10 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-
+        
+        # get database
+        db = get_db()
+        
         # Get user from database
         user = db.execute(
             'SELECT * FROM user WHERE email = ?LIMIT 1',
@@ -64,12 +65,13 @@ def login():
             session.permanent = True
             session["user"] = user['id']
             session["isAdmin"] = user["isAdmin"]
+            session["username"] = user["username"]
             flash('Login successful!', 'success')
             return redirect(url_for('web.home'))
         else:
             flash('Invalid credentials. Please try again and check to see if you have a registered account or not.', 'danger')
             return render_template('auth/login.html', logged_in=inSession())
-
+        
     else:
         if inSession():
             return redirect(url_for('web.home'))
@@ -79,7 +81,10 @@ def login():
 @bp.route('/logout')
 def logout():
     if inSession():
-        username = session["user"]
+        username = session["username"]
         flash(f"You have been logged out, {username}!", "info")
     session.clear()
     return redirect(url_for('auth.login'))
+
+def inSession():
+    return "user" in session

@@ -4,13 +4,8 @@ from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from flaskr.db import get_db
 import os, uuid, glob
-# checks if user is in session
-from utils.session import inSession
 
 bp = Blueprint('admin', __name__, url_prefix='/admin')
-
-# get database
-db = get_db()
 
 # function for checking if user has permission to view databases
 def admin_required(f):
@@ -33,6 +28,9 @@ def admin_required(f):
 @bp.route('/bug-reports')
 @admin_required
 def reports():
+    # get database
+    db = get_db()
+
     # Fetch all bug reports from the database
     reports = db.execute('SELECT * FROM bug_report').fetchall()
     return render_template('admin/reports.html', reports=reports, logged_in=inSession())
@@ -40,7 +38,13 @@ def reports():
 @bp.route('/users')
 @admin_required
 def users():
+    # get database
+    db = get_db()
+
     # Fetch all users from database
     users = db.execute('SELECT * FROM user').fetchall()
     return render_template('admin/users.html', users=users, logged_in=inSession())
+
+def inSession():
+    return "user" in session
 
