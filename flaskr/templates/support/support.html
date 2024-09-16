@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %} Support {% endblock %}
+{% block style %} "{{url_for('static', filename='styles/support.css')}}" {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row support-desc">
+        <h1>Support</h1>
+        <p> If you find any bugs on my website, please report them by using the form below! </p>
+    </div>
+
+    <div class="row">
+        <form method="POST" action="{{ url_for('support.support') }}" class="mt-4">
+            <div class="col-12 mb-3">
+                <label for="bugDate" class="form-label">Date of Bug Found</label>
+                <input type="date" class="form-control" id="bugDate" name="bug_date" required>
+            </div>
+            <div class=" col-12 mb-3">
+                <label for="bugDescription" class="form-label">Bug Description</label>
+                <textarea class="form-control" id="bugDescription" name="bug_description" rows="3" required></textarea>
+            </div>
+            <div class="col-12 mb-3">
+                <label for="page" class="form-label">Page Where Bug Occurred</label>
+                <input type="text" class="form-control" id="page" name="bug_page" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Bug</button>
+        </form>
+    </div>
+
+</div>
+{% endblock %}
+
+
+{% block script %} "{{ url_for('static', filename='') }}" {% endblock %}

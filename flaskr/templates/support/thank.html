@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %} Bug Reports {% endblock %}
+{% block style %} "{{url_for('static', filename='styles/thank.css')}}" {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row thank-title">
+        <h1> Bug Reported! </h1>
+    </div>
+
+    <div class="row thank-desc">
+        <h3> Thank you for reporting this bug. I am working diligently to fix all bugs ASAP to ensure positive user experiences for all! </h3>
+    </div>
+
+    <div class="row page-selection">
+        <div class="col-12 col-lg-4 mb-3 text-center">
+            <a href="{{url_for('web.song')}}" class="text-decoration-none">
+                <div class="card">
+                    <h2> Song Reading </h2>
+                </div>
+            </a>
+        </div>
+        <div class="col-12 col-lg-4 mb-3 text-center">
+            <a href="{{url_for('web.artist')}}" class="text-decoration-none">
+                <div class="card">
+                    <h2> Artist Search </h2>
+                </div>
+            </a>
+        </div>
+        <div class="col-12 col-lg-4 mb-3 text-center">
+            <a href="{{url_for('web.album')}}" class="text-decoration-none">
+                <div class="card">
+                    <h2> Album Search </h2>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+{% block script %} "{{ url_for('static', filename='') }}" {% endblock %}
