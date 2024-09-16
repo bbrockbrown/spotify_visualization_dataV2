@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %} Bug Reports {% endblock %}
+{% block style %} "{{url_for('static', filename='styles/reports.css')}}" {% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row reports-title"> <h1>Submitted Bug Reports</h1> </div>
+    <table class="table table-dark table-striped table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date Reported</th>
+                <th>Description</th>
+                <th>Page</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for report in reports %}
+            <tr>
+                <td>{{ report._id }}</td>
+                <td>{{ report.date_reported }}</td>
+                <td class="bug-desc">{{ report.description }}</td>
+                <td>{{ report.page }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+
+{% block script %} "{{ url_for('static', filename='') }}" {% endblock %}
+
