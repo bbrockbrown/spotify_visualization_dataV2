@@ -36,4 +36,8 @@ def create_app(test_config=None):
     from . import db
     db.init_app(app)
     
+    # Connect blueprints within app
+    from . import web
+    app.register_blueprint(web.bp)
+    
     return app
