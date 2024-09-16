@@ -1,0 +1,58 @@
+.container {
+    color: white;
+    font-family: 'Spotify-font', sans-serif;
+}
+
+.reports-title {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.bug-desc {
+    max-height: 100px;    /* Adjust the height as needed */
+    max-width: 250px;     /* Adjust the width as needed */
+    overflow-y: auto;     /* Enable vertical scrolling */
+    overflow-x: hidden;   /* Prevent horizontal scrolling */
+    word-wrap: break-word;/* Allow long words to break and wrap */
+    padding-left: 5px;   /* Add left padding to shift content to the right if needed */
+}
+
+.table {
+    table-layout: auto; /* Ensures columns respect fixed widths */
+}
+
+th {
+    font-size: 20px;
+}
+
+td {
+    overflow: scroll;
+}
+
+th, td {
+    padding: 10px; /* Adjust padding as needed */
+}
+
+th:nth-child(1), td:nth-child(1) {
+    width: 40px; /* Adjust width of the ID column */
+}
+
+th:nth-child(2), td:nth-child(2) {
+    width: 100px; /* Adjust width of the Date Reported column */
+}
+
+th:nth-child(3), td:nth-child(3) {
+    width: 300px; /* Adjust width of the Description column */
+}
+
+th:nth-child(4), td:nth-child(4) {
+    width: 100px; /* Adjust width of the Page column */
+    padding-left: 30px;
+}
+
+tr {
+    height: 50px;
+}
+
+
+

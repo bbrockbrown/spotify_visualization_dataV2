@@ -1,0 +1,31 @@
+.container {
+    color: white !important;
+    font-family: 'Spotify-font', sans-serif !important;
+}
+
+.thank-title {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.card {
+    background-color: var(--body-Color);
+    height: 250px;
+    border: 2px solid white;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease; /* Smooth transition for both transform and opacity */
+}
+
+.card:hover {
+    transform: scale(1.05); /* Slightly enlarge the card on hover */
+    background-color: rgb(160, 160, 160);
+}
+
+.card > h2 {
+    color: white !important;
+    font-family: 'Spotify-font', sans-serif !important;
+    margin: auto 0;
+}
+
+.page-selection {
+    margin-top: 35px;
+}

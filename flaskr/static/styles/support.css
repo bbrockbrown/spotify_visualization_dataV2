@@ -1,0 +1,12 @@
+.container {
+    color: white;
+    font-family: 'Spotify-font', sans-serif;
+}
+
+.support-desc {
+    margin-top: 40px;
+}
+
+.support-desc p {
+    font-weight: lighter;
+}

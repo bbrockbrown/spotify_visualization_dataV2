@@ -1,0 +1,244 @@
+#instructions-header {
+    margin-bottom: 20px;
+}
+
+.instructions {
+    color: white;
+    font-family: 'Spotify-font', sans-serif;
+}
+
+#instruction-list > li {
+    border-image: linear-gradient(to right, white 0%, var(--body-Color) 100%) 1;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    margin-bottom: 5px;
+}
+
+.list-group {
+    --bs-list-group-bg: var(--body-Color);
+    --bs-list-group-color: white;
+    --bs-list-group-border-width: 0px;
+    --bs-list-group-border-radius: 0px;
+    --bs-list-group-item-padding-x: 0px;
+}
+
+.row > .list-group {
+    padding: 0;
+}
+
+.track-search {
+    flex-wrap: nowrap;
+    min-width: min-content;
+    margin-top: 20px;
+}
+
+.search {
+    position: relative;
+}
+
+#search-results {
+    border: 2px solid #ccc;
+    padding: 0;
+    margin-top: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: none;
+    position: absolute;
+    background-color: var(--body-Color);
+    z-index: 1000;
+}
+
+.search-result-item {
+    padding: 10px;
+    cursor: pointer;
+    background-color: var(--body-Color);
+    color: white;
+    width: inherit;
+    border-bottom: 1px solid #ccc;
+}
+
+.search-result-item:hover {
+    background-color: #8b8b8b;
+}
+
+#result-placeholder {
+    text-align: center;
+    color: white;
+    font-family: 'Spotify-font', sans-serif;
+    margin-top: 25px;
+    white-space: nowrap;
+}
+
+#result-placeholder > h1 {
+    overflow-x: auto;
+}
+
+#results {
+    padding: 0;
+    height: 0%;
+    margin-top: 20px;
+    margin-bottom: 30%; /* Start with this to allow proper spacing; once script runs, fixed px value takes over */
+    position: relative;
+}
+
+#results .col-lg-6 {
+    position: relative;
+    width: 50%;
+}
+
+#results .col-lg-6:nth-child(1) {
+    transform: translate(-50px, 0); /* Align the first column on the left */
+}
+
+#results .col-lg-6:nth-child(2) {
+    transform: translate(50px, 0); /* Align the second column on the right */
+}
+
+/* Due to result sizing, responsiveness will rely on screen size & translations */
+@media (min-width: 992px) and (max-width: 1072px) {
+    #results .col-lg-6:nth-child(1) {
+        transform: translate(-1%, 0);
+    }
+    #results .col-lg-6:nth-child(2) {
+        transform: translate(3%, 0);
+        padding-right: 1% !important;
+    }
+}
+
+/* Adjust padding for two result columns for small range of pixels due to transformations */
+@media (min-width: 1200px) and (max-width: 1250px) {
+    #results .col-lg-6:nth-child(1) {
+        padding-left: 5% !important;
+    }
+    #results .col-lg-6:nth-child(2) {
+        padding-right: 5% !important;
+    }
+}
+
+/* Any screen smaller than medium sized screens will have results displayed in one large column rather than two */
+@media (max-width: 992px) {
+    #results .col-lg-6 {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    #results .col-lg-6:nth-child(1) {
+        transform: none; /* Reset to no alignment */
+    }
+
+    #results .col-lg-6:nth-child(2) {
+        transform: none; /* Reset to no alignment */
+    }
+}
+
+#album-info-container, #album-tracks-container {
+    color: white;
+    text-align: center;
+    font-family: 'Spotify-font', sans-serif;
+}
+
+/* Right column of results (Album Info) */
+#album-info-container {
+    padding-top: 9%;
+}
+
+.large-album-cover {
+    margin-bottom: -120px;
+}
+
+
+#album-cover {
+    object-fit: cover; /* Ensures the image covers the entire container */
+    height: 75%;
+    width: auto;
+}
+
+#artist-cover {
+    object-fit: cover; /* Ensures the image covers the entire container */
+    height: 75%;
+    width: auto;
+}
+
+.bullet {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+/* Left column of results (Album tracks) */
+#album-tracks-container {
+    color: white;
+    font-family: 'Spotify-font', sans-serif;
+    text-align: center;
+}
+
+.col-headers {
+    position: relative;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+/* Custom bottom-border length */
+.col-headers::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 2%;  /* starting position */
+    width: 95%;  /* length of the border */
+    height: 1px;
+    background-color: rgb(66, 65, 69);  /* Color of the border */
+}
+
+.pop-over {
+    --bs-tooltip-bg: var(--body-Color);
+    --bs-tooltip-color: var(--bs-white);
+}
+
+#album-tracks-container > .row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.track-item {
+    width: inherit;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+#track-number {
+    margin: 0;
+}
+
+.top-track-name {
+    margin: 0;
+}
+
+#pop-rating {
+    margin: 0;
+}
+
+#track-duration {
+    margin: 0;
+}
+
+.num-and-pop-wrapper {
+    display: flex;
+    flex-flow: wrap column;
+    justify-content: start;
+    text-align: left;
+    margin-left: 20px;
+    max-width: 75%; /* Ensure it doesn't stretch to full width */
+}
+
+.date-wrapper {
+    display: flex;
+    justify-content: center;
+    text-align: left; /* Preserve left alignment */
+    max-width: 75%; /* Ensure it doesn't stretch to full width */
+    margin: 0 auto; /* Center the wrapper */
+    overflow-x: scroll;
+}
+
+.num-and-pop-wrapper h4 {
+    margin-bottom: 10px; /* Add spacing between h4 elements */
+}
