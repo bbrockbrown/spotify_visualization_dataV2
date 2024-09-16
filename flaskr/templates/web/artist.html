@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %} Artist Search {% endblock %}
+{% block style %} "{{url_for('static', filename='styles/artist.css')}}" {% endblock %}
+
+{% block content %}
+<div class="container px-0">
+    <div class="row text-center">
+        <h1 class="instructions" id="instructions-header"> Here's how it works: </h1>
+    </div>
+    
+    <div class="row">
+        <ol class="list-group list-group-numbered" id="instruction-list">
+            <li class="list-group-item d-flex justify-content-between align-items-start gradient">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold">Enter an artist's name into the search bar below.</div>
+                Ensure proper spelling of said artist.
+            </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-start gradient">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold">Wait a few moments for !stats.fm to generate the artist's top tracks and discography.</div>
+                This may take up to 10 seconds.
+            </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-start gradient">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold">If you like a certain artist's music, press the 'View Similar Artists' button!</div>
+                See button below an artist's songs & albums. 
+            </div>
+            </li>
+        </ol>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-8 col-sm-6 p-0">
+            <div class="input-group track-search">
+                <span class="input-group-text" id="basic-addon1">
+                    <img src="{{ url_for('static', filename='images/search.svg') }}" alt="Search Icon" id="search-icon">
+                </span>
+                <input type="text" class="form-control" name="search-bar" id="search-bar" placeholder="Search an artist..." aria-label="Search an artist..." aria-describedby="basic-addon1">
+            </div>
+        </div>
+    </div>
+
+    <div class="row search">
+        <div id="search-results">
+            <!--  Placeholder for search results as user types in artist name -->
+        </div>
+    </div>
+
+    <div class="row">
+        <h2 id="result-placeholder"> Your results will be displayed below... </h2>
+    </div>
+
+    <div id="results" class="container">
+        
+        <!--  Artist Query Results  -->
+        <div class="row">
+            <div class="col-12 col-lg-6 p-0">
+                <div id="top-tracks-container">
+                    <!--  Placeholder artist's top tracks display -->
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-6 p-0">
+                <div id="album-container">
+                    <!--  Placeholder for artist's discography display -->
+                </div>
+                <div class="row justify-content-center"> 
+                    <button type="button" id="view-more-btn" class="btn btn-outline-light"> View All Albums </button> 
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
+
+
+{% block script %} "{{ url_for('static', filename='scripts/artist_search.js') }}" {% endblock %}
