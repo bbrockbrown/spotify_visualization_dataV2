@@ -1,0 +1,19 @@
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS bug_report;
+
+CREATE TABLE user (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    firstName TEXT NOT NULL,
+    lastName TEXT NOT NULL,
+    username TEXT UNIQUE NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    isAdmin BOOLEAN NOT NULL DEFAULT 0
+);
+
+CREATE TABLE bug_report (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    date_reported TEXT NOT NULL,
+    description TEXT NOT NULL,
+    page TEXT NOT NULL
+);
