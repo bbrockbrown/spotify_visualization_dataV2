@@ -37,7 +37,10 @@ def create_app(test_config=None):
     db.init_app(app)
     
     # Connect blueprints within app
-    from . import web
+    from . import web, auth, support, admin
     app.register_blueprint(web.bp)
+    app.register_blueprint(auth.bp)
+    app.register_blueprint(support.bp)
+    app.register_blueprint(admin.bp)
     
     return app
