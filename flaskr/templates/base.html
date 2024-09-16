@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/main.css')}}" type="text/css">
+    <link rel="stylesheet" href= {% block style %}{% endblock %} type="text/css">
+    <link rel="icon" type="image/png" href="/static/images/spotify_logo.png">
+    <title> {% block title %}{% endblock %}</title>
+</head>
+<body>
+    <div class="content-container">
+        <!--    Navbar    -->
+        <nav class="navbar navbar-expand-lg" style="background-color: var(--body-Color)">
+            <div class="container">
+                <a class="navbar-brand" href="{{url_for('web.index')}}"><img src="{{ url_for('static', filename='images/spotify_logo.png') }}" alt="Spotify Logo" width="30" height="30" id="spotify-logo"></a>
+                <div class="header-textbox" style="width:max-content"> <h2 id="header-text">!stats.fm</h2></div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{url_for('web.index')}}">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Pages
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item py-2" href="{{url_for('web.song')}}" style="border-bottom: 1px solid gray;">Song Reading</a></li>
+                        <li><a class="dropdown-item py-2" href="{{url_for('web.artist')}}" style="border-bottom: 1px solid gray">Artist Search</a></li>
+                        <li><a class="dropdown-item py-2" href="{{url_for('web.album')}}">Album Search</a></li>
+                    </ul>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('support.support')}}"> Support </a>
+                    </li>
+                </ul>
+                <form class="d-flex flex-sm-column flex-lg-row">
+                    {% if logged_in %}
+                    <a href="{{url_for('auth.logout')}}" class="btn btn-outline-secondary text_decoration_none" id="logout-btn"> Log Out </a>
+                    {% else %}
+                    <a href="{{url_for('auth.login')}}" class="btn btn-outline-success text_decoration_none" id="login-btn"> Login </a>
+                    <div style="width: 20px"> <!-- Empty --> </div>
+                    <a href="{{url_for('auth.signUp')}}" class="btn btn-outline-primary text_decoration_none" id="signup-btn"> Sign Up </a>
+                    {% endif %}
+                </form>
+                </div>
+            </div>
+        </nav>
+
+        <!--    Main content (other pages will fill in)    -->
+        <div class="main-content">
+            {% block content %} {% endblock %}
+        </div>
+        
+        <div class="stretch" style="margin-bottom: 100px">
+            <!-- Placeholder for space -->
+        </div>
+        <!--    Footer    -->
+
+        <footer>
+            <nav class="navbar" style="background-color: var(--body-Accent-Color)">
+            <form class="container-fluid align-items-center flex-column py-3">
+
+                <div class="row">
+                <div class="col-lg-3 mb-3 footer-disclaimer ms-auto me-auto">
+                    <a class="d-inline-flex align-items-center mb-2 text-decoration-none" href="{{url_for('web.index')}}" aria-label="!stats.fm" style="color: white;">
+                    <img src="/static/images/spotify_logo.png" width="40" height="40" class="d-block me-2">
+                    <span class="fs-5">!stats.fm</span>
+                    </a>
+                    <ul class="list-unstyled small">
+                    <li class="mb-2"> This website is created for the purpose of viewing how sonically different songs are via their 'features' and different artists & albums through <a href="https://developer.spotify.com/documentation/web-api" target="_blank" rel="noopener noreferrer"> Spotify's public API. </a> </li>
+                    <li class="mb-2"> !stats.fm is not meant to impersonate the official <a href="https://stats.fm/" rel="noopener noreferrer" target="_blank"> stats.fm </a> website, but rather to serve as a fun 'spin-off'.</li>
+                    <li class="mb-2"> Designed by Brock Brown.</li>
+                    </ul>
+                </div>
+                <div class="col-6 col-sm-3 col-lg-2 offset-lg-1 mb-3 ms-auto">
+                    <h5 style='color: white;'> Pages </h5>
+                    <ul class="list-unstyled">
+                    <li class="mb-2"><a href="{{url_for('web.index')}}"> Home </a></li>
+                    <li class="mb-2"><a href="{{url_for('web.song')}}"> Song Reading </a></li>
+                    <li class="mb-2"><a href="{{url_for('web.artist')}}"> Artist Search </a></li>
+                    <li class="mb-2"><a href="{{url_for('web.album')}}"> Album Search </a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-sm-3 col-lg-2 mb-3">
+                    <h5 style='color: white;'> Support</h5>
+                    <ul class="list-unstyled">
+                    <li class="mb-2"><a href="{{url_for('support.support')}}"> Report a Bug </a></li>
+                    </ul>
+                </div>
+                <div class="col- col-sm-3 col-lg-2 mb-3 me-auto">
+                    <h5 style='color: white;'> Reach Out </h5>
+                    <ul class="list-unstyled">
+                    <li class="mb-2"><a href="https://linktr.ee/bbrockbrown" rel="noopener noreferrer" target="_blank"> Contact </a></li>
+                    </ul>
+                </div>
+                </div>
+
+                <div class="row logo-row text-center">
+                <div class="col-12"> <h2 style="margin: 0"> !stats.fm </h2> </div>
+                <div class="col-12"> <p style="font-size: 12px; margin: 0">All content and information with copyrights belong to their respective owners i.e. Spotify, stats.fm, etc.</p> </div>
+                </div>
+
+                <div class="row footer-row">
+                <div class="col">
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=brockbrown46@gmail.com" target="_blank">
+                    <i class="bi bi-envelope-arrow-up" style="font-size: 40px;"></i>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="https://www.linkedin.com/in/brock-brown-058216221/" rel="noopener noreferrer" target="_blank">
+                    <i class="bi bi-linkedin" style="font-size: 40px;"></i>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="https://www.instagram.com/bbrockbrown/" rel="noopener noreferrer" target="_blank">
+                    <i class="bi bi-instagram" style="font-size: 40px;"></i>
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="https://github.com/bbrockbrown" rel="noopener noreferrer" target="_blank">
+                    <i class="bi bi-github" style="font-size: 40px;"></i>
+                    </a>
+                </div>
+                </div>
+            </form>
+            </nav>
+        </footer> 
+    </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
+    <script src={{ url_for('static', filename='scripts/api.js') }} type="module" defer></script>
+    <script src={% block script %}{% endblock %} type="module" defer></script>
+</body>
+</html>

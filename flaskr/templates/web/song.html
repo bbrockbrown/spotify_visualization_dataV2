@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% block title %} Song Reading Page {% endblock %}
+{% block style %} "{{url_for('static', filename='styles/song.css')}}" {% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="row text-center">
+        <h1 class="instructions" id="instructions-header"> Here's how it works: </h1>
+    </div>
+
+    <div class="row">
+        <ol class="list-group list-group-numbered" id="instruction-list">
+            <li class="list-group-item d-flex justify-content-between align-items-start gradient">
+                <div class="ms-2 me-auto">
+                    <div class="fw-bold">Ensure you are logged in to use the song 'reading' feature</div>
+                    If you are not logged in, or you do not have an account, please do so now.
+                </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-start gradient">
+                <div class="ms-2 me-auto">
+                    <div class="fw-bold">Enter a song into the search bar below.</div>
+                    Ensure proper spelling of song.
+                </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-start gradient">
+                <div class="ms-2 me-auto">
+                    <div class="fw-bold">Wait a few moments for !stats.fm to generate song 'reading'.</div>
+                    This may take up to 10 seconds.
+                </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-start gradient">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold">View colorful and unique reading of song of your choice!</div>
+                Please reference below to see what each song 'reading' consists of.
+            </div>
+            </li>
+        </ol>
+    </div>
+
+    <div class="row text-center my-2" id="example-title">
+        <h3> See examples below! </h3>
+    </div>
+
+
+    <!--  Carousel showing song reading examples  -->
+
+    <div id="readings-carousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#readings-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#readings-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#readings-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/static/images/song_reading_ex/reading1.png" class="d-block w-100" alt="Slide 1">
+            </div>
+
+            <div class="carousel-item">
+                <img src="/static/images/song_reading_ex/reading2.png" class="d-block w-100" alt="Slide 2">
+            </div>
+
+            <div class="carousel-item">
+                <img src="/static/images/song_reading_ex/reading3.png" class="d-block w-100" alt="Slide 3">
+            </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#readings-carousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#readings-carousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+
+
+    <!--  Song Search Bar  -->
+    <div class="row justify-content-center mt-4">
+        <div class="col-8 col-sm-6 p-0">
+            <div class="input-group track-search">
+                <span class="input-group-text" id="basic-addon1">
+                    <img src="{{ url_for('static', filename='images/search.svg') }}" alt="Search Icon" id="search-icon">
+                </span>
+                <input type="text" class="form-control" name="search-bar" {% if not logged_in %} disabled {% endif %} id="search-bar" placeholder="Search a track..." aria-label="Search a track..." aria-describedby="basic-addon1">
+            </div>
+        </div>
+    </div>
+
+    <div class="row search">
+        <div id="search-results">
+            <!--  Placeholder for search results as user types in song name -->
+        </div>
+    </div>
+
+    <div class="row">
+        <h2 id="result-placeholder"> Your results will be displayed below... </h2>
+    </div>
+
+    <div id="results" class="container">
+        {% if logged_in %}
+        <!--  Song Reading Results  -->
+        <div class="row">
+            <div class="col-12 col-lg-6 ps-0 pe-0 measurement-col">
+                <div id="reading-measurements">
+                    <!--  Placeholder for song reading measurements display -->
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-6 p-0 justify-content-center graph-col">
+                <div id="graph-container">
+                    <!--  Placeholder for song reading image display -->
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="container">
+            <div class="row border justify-content-center border-success rounded-5 text-center p-3"> 
+                <h1 class="instructions"> You must be logged in to use this feature! </h1>
+                <div class="row flex-column flex-lg-row justify-content-center mt-3 mb-lg-1">
+                    <div class="col-12 col-lg-6"> 
+                        <a href="{{url_for('login')}}" class="btn btn-outline-success text_decoration_none w-100" id="login-btn"> Login </a>
+                    </div>
+                    <div class="col-12 col-lg-6"> 
+                        <a href="{{url_for('signUp')}}" class="btn btn-outline-primary text_decoration_none w-100" id="signup-btn"> Sign Up </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %} "{{ url_for('static', filename='scripts/song_search.js') }}" {% endblock %}
