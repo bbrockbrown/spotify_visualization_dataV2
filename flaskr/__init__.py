@@ -33,8 +33,7 @@ def create_app(test_config=None):
     app.permanent_session_lifetime = timedelta(minutes=30)
     
     # Initialize database with app
-    # db.init_app(app)
-    # with app.app_context():
-    #     db.create_all()
+    from . import db
+    db.init_app(app)
     
     return app
