@@ -1,5 +1,5 @@
 from functools import wraps
-from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for, jsonify
+from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for, jsonify, make_response
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from flaskr.db import get_db
@@ -25,10 +25,23 @@ def admin_required(f):
             
     return decorated_function
 
+# Prevents users from experiencing cache issues when logging out then hitting back, etc.
+def no_cache_headers(view):
+    """Decorator to set Cache-Control headers to prevent caching"""
+    @wraps(view)
+    def no_cache(*args, **kwargs):
+        response = make_response(view(*args, **kwargs))
+        response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+        return response
+    return no_cache
+
 
 # Page displaying all bug reports from DB
 @bp.route('/bug-reports')
 @admin_required
+@no_cache_headers
 def reports():
     # get database
     db = get_db()
@@ -40,6 +53,7 @@ def reports():
 # Page displaying all users from DB
 @bp.route('/users')
 @admin_required
+@no_cache_headers
 def users():
     # get database
     db = get_db()
