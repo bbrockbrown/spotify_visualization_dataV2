@@ -103,7 +103,7 @@ document.addEventListener('click', (event) => {
 
 async function sendDataToServer(data) {
     try {
-        const response = await fetch('/song-reading-page', {
+        const response = await fetch('/web/song-reading-page', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
