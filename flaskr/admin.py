@@ -25,6 +25,8 @@ def admin_required(f):
             
     return decorated_function
 
+
+# Page displaying all bug reports from DB
 @bp.route('/bug-reports')
 @admin_required
 def reports():
@@ -35,6 +37,7 @@ def reports():
     reports = db.execute('SELECT * FROM bug_report').fetchall()
     return render_template('admin/reports.html', reports=reports, logged_in=inSession())
 
+# Page displaying all users from DB
 @bp.route('/users')
 @admin_required
 def users():
