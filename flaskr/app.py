@@ -6,13 +6,10 @@ from flaskr import create_app
 
 app = create_app()
 
+# Reroute to main page upon loading
 @app.route('/')
 def index():
     return render_template('web/index.html')
 
 if __name__ == '__main__':
-    with app.app_context():
-        from flaskr.db import init_db  # Import the `init_db` function from `myapp.db`
-        init_db()  # Run the database initialization within the app context
-        
-    app.run()
+    app.run(port=8000)

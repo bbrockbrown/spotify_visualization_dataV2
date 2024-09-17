@@ -1,5 +1,5 @@
-import functools
-from flask import Blueprint, flash, g, redirect, render_template, request, url_for, jsonify, session
+from functools import wraps
+from flask import Blueprint, flash, g, redirect, render_template, request, url_for, jsonify, session, make_response
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from flaskr.db import get_db
@@ -10,15 +10,30 @@ import matplotlib.font_manager as fm
 matplotlib.use('agg')
 import matplotlib.pyplot as plt
 import matplotlib.tri as tri
-# checks if user is in session
 
 bp = Blueprint('web', __name__, url_prefix='/web')
 
-@bp.route('/')
-def index():
-    return render_template('web/index.html')
+# Prevents users from experiencing cache issues when logging out then hitting back, etc.
+def no_cache_headers(view):
+    """Decorator to set Cache-Control headers to prevent caching"""
+    @wraps(view)
+    def no_cache(*args, **kwargs):
+        response = make_response(view(*args, **kwargs))
+        response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+        return response
+    return no_cache
 
+# Route for home page
+@bp.route('/')
+@no_cache_headers
+def index():
+    return render_template('web/index.html', logged_in=inSession())
+
+# Route for song reading page
 @bp.route("/song-reading-page", methods=["POST", "GET"])
+@no_cache_headers
 def song():
     if request.method == "POST":
         if inSession():
@@ -34,17 +49,19 @@ def song():
         else:
             return render_template("web/song.html", logged_in=inSession())
 
-
-@bp.route("/artist-search-page", methods=["POST", "GET"])    
+# Route for artist search page
+@bp.route("/artist-search-page", methods=["POST", "GET"])   
+@no_cache_headers 
 def artist():
     return render_template("web/artist.html", logged_in=inSession())
 
-
+# Route for album search page
 @bp.route("/album-search-page", methods=["GET", "POST"])
+@no_cache_headers
 def album():
     return render_template("web/album.html", logged_in=inSession())
 
-
+# Responsible for generating radar-like image for song readings
 def genReading(data):
     # Make sure folder for holding user's song reading images exists
     folder = 'flaskr/static/images/song_readings'
@@ -98,7 +115,7 @@ def genReading(data):
     # Return the name
     return filename
 
-
+# Optimize memory by deleting any past song reading images
 def delete_old_images():
     image_folder = 'flaskr/static/images/song_readings/*'
     old_images = glob.glob(image_folder)
