@@ -154,6 +154,15 @@
     --bs-tooltip-color: var(--bs-white);
 }
 
+.tool-tip {
+    color: white !important;
+    animation: 1s color ease-in-out !important;
+}
+
+.tool-tip:hover {
+    color: rgb(188, 188, 188) !important;
+}
+
 @media (min-width: 576px) {
     .clock-container {
         padding-right: 11%;
