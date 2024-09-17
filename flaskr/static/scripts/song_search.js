@@ -14,7 +14,11 @@ const myCarouselElement = document.querySelector('#readings-carousel');
 const carousel = new bootstrap.Carousel(myCarouselElement, {
     interval: 5000,
     touch: false
-})
+});
+
+search.addEventListener('focus', () => {
+    search.select();
+});
 
 search.addEventListener('input', async () => {
     const query = search.value.trim();

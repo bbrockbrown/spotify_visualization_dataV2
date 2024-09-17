@@ -8,6 +8,10 @@ const albumContainer = document.querySelector("#album-container");
 const viewMoreBtn = document.querySelector("#view-more-btn");
 const tracksContainer = document.querySelector("#top-tracks-container");
 
+search.addEventListener('focus', () => {
+    search.select();
+});
+
 search.addEventListener('input', async () => {
     const query = search.value.trim().toLowerCase();
 

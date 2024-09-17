@@ -9,6 +9,9 @@ const albumInfoContainer = document.querySelector("#album-info-container");
 const albumTracksContainer = document.querySelector("#album-tracks-container");
 let albumDuration = 0;
 
+search.addEventListener('focus', () => {
+    search.select();
+});
 
 search.addEventListener('input', async () => {
     const query = search.value.trim().toLowerCase();
