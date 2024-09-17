@@ -1,1 +1,2 @@
 # spotify_visualization_dataV2
+This website uses Spotify's public API to allow users to view song 'readings', albums, and artists. This music data is conveyed via generated, radar-like graphs and user-friendly images, all organized in a way to make learning about music fun. 
