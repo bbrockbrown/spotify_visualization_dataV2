@@ -88,6 +88,11 @@ body {
   position: relative;
 }
 
+.form-control:focus {
+  border-color: var(--spotify-Color) !important;
+  box-shadow: 0 0 0.25rem .25rem rgb(35, 214, 94, .25) !important;
+}
+
 .bi {
   color: var(--spotify-Color);
 }
@@ -109,6 +114,12 @@ footer > * {
 
 .footer-disclaimer {
   border-right: 1px solid white;
+}
+
+@media (max-width: 991px) {
+  .footer-disclaimer {
+    border-right: none !important;
+  }
 }
 
 ul a {
