@@ -2,3 +2,7 @@
     font-family: 'Spotify-font', sans-serif !important;
     color: white !important;
 }
+
+.login-box {
+    margin-bottom: 35px;
+}
