@@ -9,12 +9,12 @@
 }
 
 .bug-desc {
-    max-height: 100px;    /* Adjust the height as needed */
-    max-width: 250px;     /* Adjust the width as needed */
-    overflow-y: auto;     /* Enable vertical scrolling */
-    overflow-x: hidden;   /* Prevent horizontal scrolling */
+    max-height: 100px;    
+    max-width: 250px;   
+    overflow-y: auto;     
+    overflow-x: hidden;   
     word-wrap: break-word;/* Allow long words to break and wrap */
-    padding-left: 5px;   /* Add left padding to shift content to the right if needed */
+    padding-left: 5px;   
 }
 
 .table {
@@ -30,23 +30,23 @@ td {
 }
 
 th, td {
-    padding: 10px; /* Adjust padding as needed */
+    padding: 10px; 
 }
 
 th:nth-child(1), td:nth-child(1) {
-    width: 40px; /* Adjust width of the ID column */
+    width: 40px; 
 }
 
 th:nth-child(2), td:nth-child(2) {
-    width: 100px; /* Adjust width of the Date Reported column */
+    width: 100px;
 }
 
 th:nth-child(3), td:nth-child(3) {
-    width: 300px; /* Adjust width of the Description column */
+    width: 300px; 
 }
 
 th:nth-child(4), td:nth-child(4) {
-    width: 100px; /* Adjust width of the Page column */
+    width: 100px; 
     padding-left: 30px;
 }
 

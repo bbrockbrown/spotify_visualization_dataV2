@@ -138,9 +138,9 @@
 #graph-container {
     align-self: center;
     position: relative;
-    padding-bottom: 65%; /* 1:1 Aspect Ratio */
+    padding-bottom: 65%;
     overflow: hidden;
-    min-width: 200px; /* Set a minimum width for the container */
+    min-width: 200px; 
     max-width: 100%;
     text-align: center;
 }
@@ -152,7 +152,7 @@
     transform: translate(-50%, -50%); /* Centers the image */
     width: 100%;
     height: auto; /* Keeps the aspect ratio intact */
-    object-fit: contain; /* Ensures the image scales proportionally */
+    object-fit: contain; 
     min-width: 300px; /* Prevents it from getting too small */
     min-height: 300px; /* Prevents it from getting too small */
 }
