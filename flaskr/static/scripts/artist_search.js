@@ -8,10 +8,12 @@ const albumContainer = document.querySelector("#album-container");
 const viewMoreBtn = document.querySelector("#view-more-btn");
 const tracksContainer = document.querySelector("#top-tracks-container");
 
+// Highlight text when entering a query --> delete previous query easier
 search.addEventListener('focus', () => {
     search.select();
 });
 
+// Responsible for query results as user types in search bar
 search.addEventListener('input', async () => {
     const query = search.value.trim().toLowerCase();
 
@@ -75,7 +77,7 @@ search.addEventListener('input', async () => {
                     div.style.borderBottom = 'none';
                 }
 
-                // Optional: Handle click on the suggestion
+                // Reset search bar + output results when user clicks on a query
                 div.addEventListener('click', async () => {
                     search.value = `${artist.name}`;
                     hideSearchResults();
@@ -137,6 +139,7 @@ async function genResults(artist) {
     toolTips.forEach(t => new bootstrap.Tooltip(t));
 }
 
+// Generates artist albums
 async function genAlbums(albums) {
     albumContainer.innerHTML = '<h2 id="discography-title" class="mt-sm-5 mt-lg-0"> Discography </h2>';
 
@@ -186,6 +189,7 @@ async function genAlbums(albums) {
     }
 }
 
+// Expands to let user view all albums
 viewMoreBtn.addEventListener("click", (e) => {
     let hiddenAlbums = document.querySelectorAll(".album-item:nth-child(n+5)");
 
@@ -196,6 +200,8 @@ viewMoreBtn.addEventListener("click", (e) => {
     e.target.style.display = 'none';
 });
 
+
+// Generates artist top tracks
 async function genTopTracks(tracks) {
     const msToMinutesAndSeconds = function(ms) {
         const totalSeconds = Math.floor(ms / 1000);
@@ -291,8 +297,4 @@ async function genTopTracks(tracks) {
         trackNum++;
     })
 }
-
-
-
-// const related = await APIController.getRelatedArtists(token, artistID, 5);
 

@@ -16,10 +16,12 @@ const carousel = new bootstrap.Carousel(myCarouselElement, {
     touch: false
 });
 
+// Highlight text when entering a query --> delete previous query easier
 search.addEventListener('focus', () => {
     search.select();
 });
 
+// Responsible for query results as user types in search bar
 search.addEventListener('input', async () => {
     const query = search.value.trim();
 
@@ -49,7 +51,7 @@ search.addEventListener('input', async () => {
                     div.style.borderBottom = 'none';
                 }
 
-                // Optional: Handle click on the suggestion
+                // Reset search bar + output results when user clicks on a query
                 div.addEventListener('click', async () => {
                     search.value = `"${track.name}" by ${track.artists.map(artist => artist.name).join(', ')}`
                     hideSearchResults();
@@ -71,7 +73,7 @@ search.addEventListener('input', async () => {
     }
 });
 
-
+// Generates song reading from track
 async function trackToGraph(track) {
     const token = await APIController.getToken();
     const trackID = track.id;
@@ -105,6 +107,7 @@ document.addEventListener('click', (event) => {
     }
 });
 
+// Communicates with python script to get image
 async function sendDataToServer(data) {
     try {
         const response = await fetch('/web/song-reading-page', {
