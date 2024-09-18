@@ -1,9 +1,7 @@
 from functools import wraps
-from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for, make_response
-from flask_session import Session
+from flask import Blueprint, flash, redirect, render_template, request, session, url_for, make_response
 from werkzeug.security import check_password_hash, generate_password_hash
 from flaskr.db import get_db
-import os, uuid, glob
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
