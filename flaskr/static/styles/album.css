@@ -78,7 +78,7 @@
     padding: 0;
     height: 0%;
     margin-top: 20px;
-    margin-bottom: 30%; /* Start with this to allow proper spacing; once script runs, fixed px value takes over */
+    margin-bottom: 30%; 
     position: relative;
 }
 
@@ -124,7 +124,7 @@
     }
 
     #results .col-lg-6:nth-child(1) {
-        transform: translateX(3%); /* Reset to no alignment */
+        transform: translateX(3%); 
     }
 
     #results .col-lg-6:nth-child(2) {
@@ -201,7 +201,7 @@
     content: '';
     position: absolute;
     bottom: 0;
-    left: 2%;  /* starting position */
+    left: 2%;  
     width: 95%;  /* length of the border */
     height: 1px;
     background-color: rgb(66, 65, 69);  /* Color of the border */
