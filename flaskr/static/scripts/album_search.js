@@ -9,10 +9,12 @@ const albumInfoContainer = document.querySelector("#album-info-container");
 const albumTracksContainer = document.querySelector("#album-tracks-container");
 let albumDuration = 0;
 
+// Highlight text when entering a query --> delete previous query easier
 search.addEventListener('focus', () => {
     search.select();
 });
 
+// Responsible for query results as user types in search bar
 search.addEventListener('input', async () => {
     const query = search.value.trim().toLowerCase();
 
@@ -38,7 +40,7 @@ search.addEventListener('input', async () => {
                     div.style.borderBottom = 'none';
                 }
 
-                // Optional: Handle click on the suggestion
+                // Reset search bar + output results when user clicks on a query
                 div.addEventListener('click', async () => {
                     search.value = `${album.name}`;
                     hideSearchResults();
@@ -71,6 +73,7 @@ document.addEventListener('click', (event) => {
     }
 });
 
+// Responsible for generating results based on user-selected query
 async function genResults(albumID) {
     // Throw error if no ID given
     if (!albumID) { 
@@ -91,6 +94,7 @@ async function genResults(albumID) {
     genAlbum(album);
 }
 
+// Generates album cover + album-related info
 async function genAlbum(album) {
     // Create variables for relevant album info
     const coverURL = album.images[0].url;
@@ -156,6 +160,7 @@ async function genAlbum(album) {
     albumInfoContainer.appendChild(albumInfoRow);
 }
 
+// Generates album tracklist
 async function genAlbumTracks(album) {
     let tracks = album.tracks.items;
     let trackNum = 1;
@@ -190,6 +195,7 @@ async function genAlbumTracks(album) {
     // Append column headers to track container
     albumTracksContainer.appendChild(cols);
 
+    // For each album track, extract relevant info
     tracks.forEach(track => {
         const name = track.name;
         const linkTo = track.artists[0].external_urls.spotify;
@@ -225,6 +231,7 @@ async function genAlbumTracks(album) {
     });
 }
 
+// Convert MS to min:sec format due to how API stores track length
 const msToMinutesAndSeconds = function(ms) {
     const totalSeconds = Math.floor(ms / 1000);
     const minutes = Math.floor(totalSeconds / 60);
@@ -232,6 +239,7 @@ const msToMinutesAndSeconds = function(ms) {
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 }
 
+// Calculates album length based on MS input
 const albumLengthConversion = function(ms) {
     // Convert milliseconds to seconds
     let totalSeconds = Math.floor(ms / 1000);
@@ -250,6 +258,7 @@ const albumLengthConversion = function(ms) {
     }
 }
 
+// Converts date into readable format due to API format incompatibility 
 const dateConversion = function(date) {
 
     // Split the input date by hyphens
