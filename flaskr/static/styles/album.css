@@ -124,11 +124,29 @@
     }
 
     #results .col-lg-6:nth-child(1) {
-        transform: none; /* Reset to no alignment */
+        transform: translateX(3%); /* Reset to no alignment */
     }
 
     #results .col-lg-6:nth-child(2) {
         transform: none; /* Reset to no alignment */
+    }
+}
+
+@media (max-width: 576px) {
+    #results .col-lg-6 {
+        width: 90%;
+        margin-bottom: 1rem;
+    }
+
+    .duration-container {
+        margin-right: 22px !important;
+        text-align: right !important;
+    }
+
+    .clock-container {
+        margin-right: 25px !important;
+        text-align: right !important;
+        justify-content: end !important;
     }
 }
 

@@ -34,6 +34,10 @@ body {
   font-family: 'Spotify-font', sans-serif;
 }
 
+.navbar-toggler {
+  color: rgb(35, 214, 94, .25) !important;
+}
+
 .dropdown-menu {
   font-family: 'Spotify-font', sans-serif;
   background-color: var(--body-Color);
@@ -97,6 +101,10 @@ body {
   color: var(--spotify-Color);
 }
 
+.bi-list::before {
+  font-size: 30px;
+}
+
 .bi-clock::before {
   font-size: 20px;
 }
@@ -133,8 +141,8 @@ ul a {
   border-top: none;
   background-color: var(--body-Accent-Color);
   z-index: 1;
-  border: 5px solid transparent; /* Border width set to 2px */
-  border-top: none; /* Remove default top border */
+  border: 5px solid transparent; 
+  border-top: none; 
 }
 
 .footer-row::before, .footer-row::after {

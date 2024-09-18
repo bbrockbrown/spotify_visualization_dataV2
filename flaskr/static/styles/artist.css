@@ -111,18 +111,18 @@
 }
 
 /* Any screen smaller than medium sized screens will have results displayed in one large column rather than two */
-@media (max-width: 992px) {
+@media (max-width: 991px) {
     #results .col-lg-6 {
-        width: 100%;
+        width: 90%;
         margin-bottom: 1rem;
     }
 
     #results .col-lg-6:nth-child(1) {
-        transform: none; /* Reset to no alignment */
+        transform: translateX(3%); 
     }
 
     #results .col-lg-6:nth-child(2) {
-        transform: none; /* Reset to no alignment */
+        transform: translateX(6%);
     }
 }
 

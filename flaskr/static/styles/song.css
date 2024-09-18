@@ -169,5 +169,11 @@
     }
 }
 
+@media (max-width: 991px) {
+    #song-reading-img {
+        transform: translate(-52%, -40%) !important;
+    }
+}
+
 
 

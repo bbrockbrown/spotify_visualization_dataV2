@@ -281,7 +281,7 @@ async function genTopTracks(tracks) {
 
         //Create col for track duration
         const durationContainer = document.createElement("div");
-        durationContainer.classList.add("col-2", "col-sm-1", "duration-container", "ms-auto", "me-auto");
+        durationContainer.classList.add("col-2", "col-sm-1", "duration-container", "ms-auto", "me-auto", "text-center");
         durationContainer.innerHTML = `<p id="track-duration"> ${duration} </p>`;
         div.appendChild(durationContainer);
 
