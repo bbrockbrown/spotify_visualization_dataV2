@@ -85,14 +85,15 @@ async function trackToGraph(track) {
     }
     
     // Display current search query
-    resultPlaceholder.innerHTML = `<h1>"${track.name}" by ${track.artists.map(artist => artist.name).join(', ')}</h1>`;
+    // resultPlaceholder.innerHTML = `<h1> Apologies. This page is under construction :( </h1>`;
 
     // 1:1 aspect ratio for image
-    graphContainer.style.paddingBottom = '100%';
+    // graphContainer.style.paddingBottom = '100%';
 
     // Use track ID to get audio features
-    const audioFeatures = await APIController.getTrackAudioFeatures(token, trackID);
-    sendDataToServer(audioFeatures);
+    // SPOTIFY STOPPED SUPPORTING THIS UGHHHHH
+    // const audioFeatures = await APIController.getTrackAudioFeatures(token, trackID);
+    // showNotWorkingMessage();
 }
 
 
@@ -108,65 +109,84 @@ document.addEventListener('click', (event) => {
 });
 
 // Communicates with python script to get image
-async function sendDataToServer(data) {
-    try {
-        const response = await fetch('/web/song-reading-page', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                danceability: data.danceability,
-                speechiness: data.speechiness,
-                valence: data.valence,
-                energy: data.energy,
-                liveness: data.liveness,
-                acousticness: data.acousticness
-            })
-        });
+function showNotWorkingMessage() {
+    // try {
+    //     const response = await fetch('/web/song-reading-page', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify({
+    //             danceability: data.danceability,
+    //             speechiness: data.speechiness,
+    //             valence: data.valence,
+    //             energy: data.energy,
+    //             liveness: data.liveness,
+    //             acousticness: data.acousticness
+    //         })
+    //     });
 
-        const readings = {
-            "Danceability": data.danceability,
-            "Speechiness": data.speechiness,
-            "Valence": data.valence,
-            "Energy": data.energy,
-            "Liveness": data.liveness,
-            "Acousticness": data.acousticness
-        }
+    //     const readings = {
+    //         "Danceability": data.danceability,
+    //         "Speechiness": data.speechiness,
+    //         "Valence": data.valence,
+    //         "Energy": data.energy,
+    //         "Liveness": data.liveness,
+    //         "Acousticness": data.acousticness
+    //     }
 
-        if (response.ok) {
-            // path to reading image/result
-            const result = await response.json();
-            // titles for each of the columns + clear previous results
-            measurements.innerHTML = '<h3 id="measurements-title"> Song Reading Measurements </h3>';
-            graphContainer.innerHTML = '<h3 id="graph-title"> Song Reading Graph </h3>';
+    //     if (response.ok) {
+    //         // path to reading image/result
+    //         const result = await response.json();
+    //         // titles for each of the columns + clear previous results
+    //         measurements.innerHTML = '<h3 id="measurements-title"> Song Reading Measurements </h3>';
+    //         graphContainer.innerHTML = '<h3 id="graph-title"> Song Reading Graph </h3>';
     
-            for (const [reading, val] of Object.entries(readings)) {
-                let measure = document.createElement("p");
-                measure.classList.add("measurement");
-                // Round reading values to nearest thousandth
-                measure.textContent = `${reading}: ${val.toFixed(3)}`;
-                measurements.appendChild(measure);
-            }
+    //         for (const [reading, val] of Object.entries(readings)) {
+    //             let measure = document.createElement("p");
+    //             measure.classList.add("measurement");
+    //             // Round reading values to nearest thousandth
+    //             measure.textContent = `${reading}: ${val.toFixed(3)}`;
+    //             measurements.appendChild(measure);
+    //         }
             
             // Link to how these measurements are defined
-            const measurementsDefLink = document.createElement("div");
-            measurementsDefLink.classList.add("measurement", "measurements-link", "mt-4", "mt-lg-5");
-            measurementsDefLink.innerHTML = `<a class="text-decoration-none" href="https://developer.spotify.com/documentation/web-api/reference/get-audio-features" target="_blank">
-                                            <h6 class="measurement"> See how these measurements are defined here. </h6>  
-                                            </a>`;
-            measurements.appendChild(measurementsDefLink);
+            // const measurementsDefLink = document.createElement("div");
+            // measurementsDefLink.classList.add("measurement", "measurements-link", "mt-4", "mt-lg-5");
+            // measurementsDefLink.innerHTML = `<a class="text-decoration-none" href="https://developer.spotify.com/documentation/web-api/reference/get-audio-features" target="_blank">
+            //                                 <h6 class="measurement"> See how these measurements are defined here. </h6>  
+            //                                 </a>`;
+            // measurements.appendChild(measurementsDefLink);
 
             // Update the image src to display the generated graph
-            graphContainer.innerHTML += `<img src="${result.reading_url}" alt="Reading cannot be displayed" id="song-reading-img" class="rounded">`;
-            results.style.transform = 'translateY(-50px)';
-            results.style.height = '100%';
+            // graphContainer.innerHTML += `<img src="${result.reading_url}" alt="Reading cannot be displayed" id="song-reading-img" class="rounded">`;
+            // results.style.transform = 'translateY(-50px)';
+            // results.style.height = '100%';
             
-        } else {
-            const errorDetails = await response.text(); // Fetch more info
-            console.error('Failed to send data:', errorDetails);
-        }
-    } catch (error) {
-        console.error('Error:', error);
+    //     } else {
+    //         const errorDetails = await response.text(); // Fetch more info
+    //         console.error('Failed to send data:', errorDetails);
+    //     }
+    // } catch (error) {
+    //     console.error('Error:', error);
+    // }
+
+    while (results.firstChild) {
+        results.removeChild(results.firstChild);
     }
+
+    results.innerHTML = `
+    <div class="alert alert-warning" role="alert">
+        I am working on a way to support this feature again ASAP. Spotify's API endpoint for this page has been deprecated, so unfortunately, the pretty graphs you see above
+        cannot be generated.
+    </div>
+    `;
+
+    
+    // Update its content with the alert message
+    // graphContainer.innerHTML = `
+    // <div class="alert alert-warning" role="alert">
+    //     This feature is no longer supported due to Spotify's API endpoint change.
+    // </div>
+    // `;
 }

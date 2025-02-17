@@ -33,6 +33,7 @@ def index():
 @no_cache_headers
 def song():
     if request.method == "POST":
+        # Spotify has stopped supporting the API endpoint for audio features. 
         if inSession():
             data = request.json
             image_name = genReading(data)  

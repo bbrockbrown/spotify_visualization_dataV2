@@ -183,7 +183,6 @@ async function genAlbums(albums) {
 
     // Only show 'view more albums' button if artist actually has more than 3 albums
     viewMoreBtn.style.display = 'none';
-    console.log(albums)
     if (albumCount > 3) {
         viewMoreBtn.style.display = 'flex';
     }

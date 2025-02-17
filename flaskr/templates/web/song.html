@@ -103,19 +103,9 @@
 
     <div id="results" class="container">
         {% if logged_in %}
-        <!--  Song Reading Results  -->
-        <div class="row">
-            <div class="col-12 col-lg-6 ps-0 pe-0 measurement-col">
-                <div id="reading-measurements">
-                    <!--  Placeholder for song reading measurements display -->
-                </div>
-            </div>
-
-            <div class="col-12 col-lg-6 p-0 justify-content-center graph-col">
-                <div id="graph-container">
-                    <!--  Placeholder for song reading image display -->
-                </div>
-            </div>
+        <div class="alert alert-warning" role="alert">
+            I am working on a way to support this feature again ASAP. Spotify's API endpoint for this page has been deprecated, so unfortunately, the pretty graphs you see above
+            cannot be generated. If you are curious why Spotify did this, please click <a href="https://developer.spotify.com/blog/2024-11-27-changes-to-the-web-api">here</a>.
         </div>
         {% else %}
         <div class="container">
