@@ -1,7 +1,7 @@
 const APIController = (function() {
     
-    const CLIENT_ID = '943baf2551b047c9a9fc96f062b8a5e9';
-    const CLIENT_SECRET = '8cce0a7a70794acdbdb3e7d6c841ae3e';
+    const CLIENT_ID = process.env.CLIENT_ID;
+    const CLIENT_SECRET = process.env.CLIENT_SECRET;
 
     // private methods
     const _getToken = async () => {
